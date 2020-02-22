@@ -26,7 +26,8 @@ def get_article():
         soup = BeautifulSoup(req.text, 'html.parser')
         articles = soup.findAll("div", {"class": "list_cloumn"})
         for article in articles:
-            if article.find("a").get('alt').find('十堰市新冠肺炎疫情情况') != -1: #and article.find("p").get_text().find(input_date) != -1:
+            title = article.find("a").get('alt')
+            if title.find('十堰市新冠肺炎疫情情况') != -1 or title.find('十堰疫情速报') != -1: #and article.find("p").get_text().find(input_date) != -1:
                 return article.get('onclick')[13:][:-3]
         time.sleep(2)
     return None
